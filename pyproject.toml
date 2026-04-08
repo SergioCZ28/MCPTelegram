@@ -1,0 +1,64 @@
+[project]
+name = "telegram-mcp"
+version = "0.1.0"
+description = "Read your Telegram chats from Claude Code via MCP (Model Context Protocol)"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+authors = [
+    { name = "Sergio Ivan Cheng Zhu" },
+]
+keywords = ["mcp", "telegram", "claude", "anthropic", "telethon"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Communications :: Chat",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+dependencies = [
+    "fastmcp>=2.0.0",
+    "telethon>=1.36.0",
+    "python-dotenv>=1.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
+    "ruff>=0.4.0",
+]
+
+[project.scripts]
+telegram-mcp = "telegram_mcp.server:main"
+telegram-mcp-login = "telegram_mcp.login:main"
+
+[project.urls]
+Homepage = "https://github.com/SergioCZ28/MCPTelegram"
+Repository = "https://github.com/SergioCZ28/MCPTelegram"
+Issues = "https://github.com/SergioCZ28/MCPTelegram/issues"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/telegram_mcp"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP"]
+ignore = ["E501"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
